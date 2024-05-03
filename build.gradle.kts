@@ -16,11 +16,17 @@ repositories {
 }
 
 dependencies {
+  implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	runtimeOnly("org.hsqldb:hsqldb")
-	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+  runtimeOnly("org.postgresql:postgresql")
+  runtimeOnly("org.hsqldb:hsqldb")
+
+  testImplementation("org.springframework.boot:spring-boot-starter-test") {
+      exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+  }
+
+  testImplementation("org.springframework.boot:spring-boot-starter-web")
+  testImplementation("org.junit.platform:junit-platform-engine:+")
 }
 
 tasks.withType<Test> {
